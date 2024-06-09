@@ -9,20 +9,20 @@ package com.mycompany.herofight;
  * @author anaskhalifm
  */
 public class Hero extends Character {
-    private int shield;
+    private int perisai;
 
-    public Hero(String name, int health, int strength, int shield) {
+    public Hero(String name, int health, int strength, int perisai) {
         super(name, health, strength);
-        this.shield = shield;
+        this.perisai = perisai;
     }
 
     @Override
-    public void receiveDamage(int damage) {
-        int reducedDamage = damage - this.shield;
+    public void takeDamage(int damage) {
+        int reducedDamage = damage - this.perisai;
         if (reducedDamage < 0) {
             reducedDamage = 0;
         }
         setHealth(getHealth() - reducedDamage);
-        System.out.println(getName() + " menerima " + reducedDamage + " damage, kesehatan sekarang " + getHealth());
+        System.out.println(super.getName() + " menerima " + reducedDamage + " damage, kesehatan sekarang " + getHealth());
     }
 }

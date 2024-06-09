@@ -19,7 +19,7 @@ public class Monster extends Character {
     }
 
     public void enrage() {
-        System.out.println(getName() + " mengamuk dan mendapatkan " + rageBonus + " kekuatan!");
-        setStrength(getStrength() + rageBonus);
+        System.out.println(getName() + " mengamuk dan mendapatkan " + this.rageBonus + " kekuatan!");
+        setStrength(getStrength() + this.rageBonus);
     }
 }

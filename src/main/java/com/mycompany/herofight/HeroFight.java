@@ -17,12 +17,33 @@ public class HeroFight {
         Monster goblin = new Monster("Goblin", 70, 15, 2, 4);
         Monster orc = new Monster("Orc", 80, 18, 3, 6);
 
-        // Pertarungan dimulai secara berurutan
+        // Karakter yang terlibat dalam pertarungan
         Character attacker = arthur;
         Character target = lancelot;
 
+        int counter = 0;
         while (true) {
-            // Pilih penyerang dan target
+            // Pilih penyerang dan target berdasarkan counter
+            switch (counter % 4) {
+                case 0:
+                    attacker = arthur;
+                    target = lancelot;
+                    break;
+                case 1:
+                    attacker = lancelot;
+                    target = goblin;
+                    break;
+                case 2:
+                    attacker = goblin;
+                    target = orc;
+                    break;
+                case 3:
+                    attacker = orc;
+                    target = arthur;
+                    break;
+            }
+
+            // Lakukan serangan
             if (attacker.isAlive() && target.isAlive()) {
                 attacker.attack(target);
                 if (!target.isAlive()) {
@@ -33,7 +54,6 @@ public class HeroFight {
             // Periksa siapa yang masih hidup
             int aliveCount = 0;
             Character lastAlive = null;
-
             if (arthur.isAlive()) {
                 aliveCount++;
                 lastAlive = arthur;
@@ -57,26 +77,8 @@ public class HeroFight {
                 break;
             }
 
-            // Atur penyerang dan target selanjutnya secara berurutan
-            if (attacker == arthur) {
-                attacker = lancelot;
-            } else if (attacker == lancelot) {
-                attacker = goblin;
-            } else if (attacker == goblin) {
-                attacker = orc;
-            } else if (attacker == orc) {
-                attacker = arthur;
-            }
-
-            if (target == arthur) {
-                target = lancelot;
-            } else if (target == lancelot) {
-                target = goblin;
-            } else if (target == goblin) {
-                target = orc;
-            } else if (target == orc) {
-                target = arthur;
-            }
+            // Naikkan counter untuk rotasi berikutnya
+            counter++;
         }
     }
 }
