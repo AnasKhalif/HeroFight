@@ -9,46 +9,32 @@ package com.mycompany.herofight;
  * @author anaskhalifm
  */
 public class Character {
-    private String nama;
+    private String name;
     private int health;
-    private int strength;
-
-    public Character(String name, int health, int strength) {
-        this.nama = name;
-        this.health = health;
-        this.strength = strength;
-    }
-
-    public String getName() {
-        return nama;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public void setHealth(int health) {
+    
+    public Character(String name, int health){
+        this.name = name;
         this.health = health;
     }
     
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public String getName(){
+        return name;
     }
-
-    public void takeDamage(int damage) {
-        setHealth(getHealth() - damage);
+    
+    public int getHealth(){
+        return health;
+    }
+    
+    public void takeDamage(int damage){
+        health -= damage;
         System.out.println(getName() + " menerima " + damage + " damage, kesehatan sekarang " + getHealth());
     }
-
-    public void attack(Character target) {
-        System.out.println(this.nama + " menyerang " + target.getName());
-        target.takeDamage(this.strength);
+    
+    public void attack(String nama){
+        System.out.println(this.name + " menyerang " + nama);
     }
-
+    
+    // method untuk mengecek apakah masih hidup
     public boolean isAlive() {
         return this.health > 0;
     }

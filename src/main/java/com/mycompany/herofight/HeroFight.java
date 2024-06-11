@@ -11,49 +11,46 @@ package com.mycompany.herofight;
 public class HeroFight {
 
     public static void main(String[] args) {
-        // Penambahan karakter ke dalam hutan
         Hero arthur = new Hero("Arthur", 100, 20, 5);
         Hero lancelot = new Hero("Lancelot", 90, 25, 3);
         Monster goblin = new Monster("Goblin", 70, 15, 2, 4);
         Monster orc = new Monster("Orc", 80, 18, 3, 6);
+        
+        // Goblin enrage
+        goblin.enreg();
+        // Orc enrage
+        orc.enreg();
 
-        // Karakter yang terlibat dalam pertarungan
-        Character attacker = arthur;
-        Character target = lancelot;
-
-        int counter = 0;
+        // Loop until only one character is alive
         while (true) {
-            // Pilih penyerang dan target berdasarkan counter
-            switch (counter % 4) {
-                case 0:
-                    attacker = arthur;
-                    target = lancelot;
-                    break;
-                case 1:
-                    attacker = lancelot;
-                    target = goblin;
-                    break;
-                case 2:
-                    attacker = goblin;
-                    target = orc;
-                    break;
-                case 3:
-                    attacker = orc;
-                    target = arthur;
-                    break;
+            // Arthur attacks Lancelot
+            if (arthur.isAlive() && lancelot.isAlive()) {
+                arthur.attack(lancelot.getName());
+                lancelot.takeDamage(arthur.getStrength());
             }
 
-            // Lakukan serangan
-            if (attacker.isAlive() && target.isAlive()) {
-                attacker.attack(target);
-                if (!target.isAlive()) {
-                    System.out.println(target.getName() + " telah dikalahkan!");
-                }
+            // Lancelot attacks Goblin
+            if (lancelot.isAlive() && goblin.isAlive()) {
+                lancelot.attack(goblin.getName());
+                goblin.takeDamage(lancelot.getStrength());
             }
 
-            // Periksa siapa yang masih hidup
+            // Goblin attacks Orc
+            if (goblin.isAlive() && orc.isAlive()) {
+                goblin.attack(orc.getName());
+                orc.takeDamage(goblin.getStrength());
+            }
+
+            // Orc attacks Arthur
+            if (orc.isAlive() && arthur.isAlive()) {
+                orc.attack(arthur.getName());
+                arthur.takeDamage(orc.getStrength());
+            }
+
+            // Check the number of characters still alive
             int aliveCount = 0;
             Character lastAlive = null;
+
             if (arthur.isAlive()) {
                 aliveCount++;
                 lastAlive = arthur;
@@ -71,14 +68,11 @@ public class HeroFight {
                 lastAlive = orc;
             }
 
-            // Hentikan pertarungan jika hanya satu karakter yang tersisa
+            // If only one character is alive, they are the winner
             if (aliveCount == 1) {
-                System.out.println(lastAlive.getName() + " adalah karakter terakhir yang berdiri!");
+                System.out.println(lastAlive.getName() + " Menang!");
                 break;
             }
-
-            // Naikkan counter untuk rotasi berikutnya
-            counter++;
         }
-    }
+}
 }
